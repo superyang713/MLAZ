@@ -1,4 +1,4 @@
-# Decision Tree
+# Random Forest
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -7,7 +7,7 @@ import pandas as pd
 
 from sklearn.cross_validation import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix
 
 
@@ -27,7 +27,9 @@ X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
 # Fitting Naive Bayes to the Training set
-classifier = DecisionTreeClassifier(criterion='entropy', random_state=0)
+classifier = RandomForestClassifier(
+    n_estimators=50, criterion='entropy', random_state=0
+)
 classifier.fit(X_train, y_train)
 
 # Predicting the Test set results
@@ -58,7 +60,7 @@ for i, j in enumerate(np.unique(y_set)):
         c=ListedColormap(('red', 'green'))(i),
         label=j
     )
-plt.title('Decision Tree Classification (Training set)')
+plt.title('Random Forest Classification (Training set)')
 plt.xlabel('Age')
 plt.ylabel('Estimated Salary')
 plt.legend()
